@@ -1,0 +1,13 @@
+#contenair{max-width:600px;background:#FF6666;padding:10px;}
+ul{padding:0;list-style:none}
+li{margin-bottom:5px;margin-top:5px;border:1px solid black;border-radius:10px;}
+.colLeft{background:#ff9933;border:2px solid black; border-radius:10px;padding-right:10px}
+.colRight{background:#99CCFF;border:2px solid black; border-radius:10px;}
+.colLeft ul li{background:#FF6666}
+.buttonEdit{height:25px;width:25px;background:url("../img/edit.png");font-size:0;vertical-align:top;margin-left:5px;margin-right:5px;border:0;padding:0}
+.buttonDelete{height:25px;width:25px;background:url("../img/delete.png");font-size:0;vertical-align:top;border:0;padding:0}
+.contenair{max-width:1000px;padding:10px;}
+.connect-admin{margin-left:auto;margin-right:auto;max-width:385px;background:#99CCFF;padding:10px;border:2px solid black; border-radius:10px;}
+label{display:block;}
+button{width:100%;}
+button:hover{cursor:pointer}
