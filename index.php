@@ -14,6 +14,8 @@
   <body>
     <?php
       $link=mysqli_connect("localhost","root","","inte2") or die("mysql error".mysql_error());
+      include_once('class_admin.php');
+      $bdd = new SectionAdmin('','','','','','');
     ?>
     <div id="all-page">
       <header>
@@ -26,72 +28,23 @@
               <i class="fa fa-bars" aria-hidden="true"></i>
               <div class="hidden-menu">
                 <ul>
-                  <?php
-                    $resultat_menu=mysqli_query($link,'SELECT * FROM `menu`');
-                    while($data_menu=mysqli_fetch_assoc($resultat_menu)){
-                      echo'
-                      <li><a href="'.$data_menu['href'].'">'.$data_menu['title'].'</a></li>
-                      ';
-                    }
-                  ?>
+                  <?php  $bdd->showMenuHidden();  ?>
                 </ul>
               </div>
             </div>
             <ul class="small-hide large-show">
-              <?php
-              $i=1;
-                $resultat_menu2=mysqli_query($link,'SELECT * FROM `menu`');
-                while($data_menu2=mysqli_fetch_assoc($resultat_menu2)){
-                  echo'
-                    <li class="li-menu'.$i.'"><a class="link-menu'.$i.'" href="'.$data_menu2['href'].'">'.$data_menu2['title'].'</a></li>
-                  ';
-                  $i++;
-                }
-              ?>
+              <?php  $bdd->showMenu();  ?>
             </ul>
           </div>
         </div>
       </header>
       <div class="row slider">
-        <div class="column medium-5 large-5">
-          <?php
-          $resultat_title=mysqli_query($link,'SELECT * FROM `header`');
-          $data_title=mysqli_fetch_assoc($resultat_title);
-          echo'
-          <h1>'.$data_title['title'].'</h1>
-          <p>'.$data_title['text'].'</p>
-          <a href="'.$data_title['href'].'" class="link-red">read more »</a>
-          ';
-          ?>
-        </div>
-        <div class="column medium-7 large-7">
-          <?php
-          echo'<img src="'.$data_title['source'].'" alt="'.$data_title['alt'].'" />';
-          ?>
-        </div>
+        <?php $bdd->showHeader(); ?>
       </div>
       <div class="row categorie">
-        <?php
-          $resultat_categorie=mysqli_query($link,'SELECT * FROM `article`');
-          while($data_categorie=mysqli_fetch_assoc($resultat_categorie)){
-            echo'
-            <div class="column medium-6 large-3">
-              <div class="article">
-                <h3>'.$data_categorie['title'].'</h3>
-                <img src="'.$data_categorie['source'].'" alt="'.$data_categorie['alt'].'" />
-                <span>'.$data_categorie['text'].'</span>
-                <a href="'.$data_categorie['href'].'" class="link-red">read more »</a>
-              </div>
-            </div>
-            ';
-          }
-        ?>
+        <?php $bdd->showArticle(); ?>
       </div>
       <div class="row categorie2">
-
-
-
-
         <div class="column medium-6 large-3">
           <div class="article2">
             <h3>your <i>title here</i></h3>
@@ -123,49 +76,20 @@
       <footer>
         <div class="row border">
           <div class="column medium-6 large-3">
-            <?php
-            $resultat_about=mysqli_query($link,'SELECT * FROM `aboutus` where `id`="1"');
-            $data_about=mysqli_fetch_assoc($resultat_about);
-            echo'
-              <div class="article">
-              <h4>'.$data_about['title'].'</h4>
-              <img src="'.$data_about['source'].'" alt="'.$data_about['alt'].'" />
-              <p>'.$data_about['text'].'</p>
-              <a href="'.$data_about['href'].'" class="float-right">read more »</a>
-              </div>';
-            ?>
+            <?php $bdd->aboutUs();?>
           </div>
           <div class="column medium-6 large-3">
             <div class="article">
               <h4>quick links</h4>
               <ul>
-                <?php
-                  $resultat_link=mysqli_query($link,'SELECT * FROM `quicklink`');
-                  while($data_link=mysqli_fetch_assoc($resultat_link)){
-                    echo'
-                    <li><a href="'.$data_link['href'].'">'.$data_link['text'].'</a></li>
-                    ';
-                  }
-                ?>
+                <?php $bdd->quickLink();  ?>
               </ul>
             </div>
           </div>
           <div class="column medium-6 large-3">
             <div class="article">
               <h4>lasted blog posts</h4>
-              <?php
-              $resultat_blog=mysqli_query($link,'SELECT * FROM `lastblog`');
-              while($data_blog=mysqli_fetch_assoc($resultat_blog)){
-                echo'
-                <div class="post">
-                  <h5>'.$data_blog['title'].'</h5>
-                  <span class="date">'.$data_blog['date'].'</span>
-                  <p>'.$data_blog['text'].'</p>
-                  <a href="'.$data_blog['href'].'" class="float-right">Read More »</a>
-                </div>
-                ';
-              }
-              ?>
+              <?php $bdd->showBlog(); ?>
             </div>
           </div>
           <div class="column medium-6 large-3">
